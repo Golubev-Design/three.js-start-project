@@ -13,7 +13,7 @@ Demo: https://golubev-design.github.io/three.js-start-project/
 #### init() 
 General initiate Three.js `scene`, `camera`, `renderer` (with resize window events) & `controls`.
 
-#### light();
+#### light()
 All lights in scene.
 
 * `HemisphereLight` - sunlight, don't supported Shadows.
