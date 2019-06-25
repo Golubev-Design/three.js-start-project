@@ -26,10 +26,7 @@ function start3DProject() {
   function init() {
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 15000);
     camera.position.set(3000, 2000, 1000);
-
-    controls = new THREE.OrbitControls(camera);
-    controls.target.set(0, 0, 0);
-    controls.update();
+    camera.lookAt(0, 0, 0);
 
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0x1C1C1C);
@@ -51,6 +48,12 @@ function start3DProject() {
   }
 
   function ui() {
+    // controls = new THREE.OrbitControls(camera);
+    // controls.target.set(0, 0, 0);
+    // controls.update();
+
+    threeTouch(camera, canvas);
+
     stats = new Stats();
     document.body.appendChild(stats.dom);
   }
