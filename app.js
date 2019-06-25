@@ -48,9 +48,9 @@ function start3DProject() {
   }
 
   function ui() {
-    // controls = new THREE.OrbitControls(camera);
-    // controls.target.set(0, 0, 0);
-    // controls.update();
+    controls = new THREE.OrbitControls(camera);
+    controls.target.set(0, 0, 0);
+    controls.update();
 
     threeTouch = new threeTouch(camera, canvas);
     threeTouch.dispose();
