@@ -52,7 +52,8 @@ function start3DProject() {
     // controls.target.set(0, 0, 0);
     // controls.update();
 
-    threeTouch(camera, canvas);
+    threeTouch = new threeTouch(camera, canvas);
+    threeTouch.dispose();
 
     stats = new Stats();
     document.body.appendChild(stats.dom);

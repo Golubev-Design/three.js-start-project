@@ -3,9 +3,9 @@ function threeTouch(camera, canvas) {
 	this.canvas = canvas;
 
 	this.dispose = function () {
-		canvas.domElement.addEventListener( 'touchstart', onTouchStart, false );
-		canvas.domElement.addEventListener( 'touchend', onTouchEnd, false );
-		canvas.domElement.addEventListener( 'touchmove', onTouchMove, false );
+		canvas.addEventListener( 'touchstart', onTouchStart, false );
+		canvas.addEventListener( 'touchend', onTouchEnd, false );
+		canvas.addEventListener( 'touchmove', onTouchMove, false );
 	};
 
 	function onTouchStart( event ) {
