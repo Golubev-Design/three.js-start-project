@@ -1,0 +1,10 @@
+{
+  "name": "three.js-start-project",
+  "version": "1.0.0",
+  "dependencies": {
+
+  },
+  "scripts": {
+    "start" : "http-server"
+  }
+}
