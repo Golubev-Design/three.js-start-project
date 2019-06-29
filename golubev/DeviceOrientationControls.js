@@ -126,7 +126,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 			// }
 
 			let reversAlpha = 360 - event.alpha;
-			if (lastAlpha === null) {
+			if (lastAlpha === null || currentAlpha > Math.floor(heading) + 50 || currentAlpha < Math.floor(heading) - 50) {
 				lastAlpha = Math.floor(reversAlpha);
 				currentAlpha = Math.floor(heading);
 			} else {
