@@ -111,6 +111,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 			var alpha    = event.alpha; //z axis rotation [0,360)
 			//Check if absolute values have been sent
 			if (typeof event.webkitCompassHeading !== "undefined") {
+				if (event.webkitCompassHeading === 0) return 0;
 				alpha = event.webkitCompassHeading; //iOS non-standard
 				var heading = alpha;
 			}	else {
@@ -127,7 +128,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 			// }
 
 			let reversAlpha = 360 - event.alpha;
-			if (lastAlpha === null || Math.floor(lastAlpha) === Math.floor(currentAlpha)) {
+			if (lastAlpha === null) {
 				lastAlpha = reversAlpha;
 				currentAlpha = Math.floor(heading);
 			} else {
@@ -135,7 +136,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 				currentAlpha += diffAlpha;
 				lastAlpha = reversAlpha;
 			}
-			document.getElementById("logs").innerHTML = 'v6<br>' + heading + '<br>' + reversAlpha + '<br>' + currentAlpha;
+			document.getElementById("logs").innerHTML = 'v7<br>' + heading + '<br>' + reversAlpha + '<br>' + currentAlpha;
 			console.log(currentAlpha);
 
 			return currentAlpha;
