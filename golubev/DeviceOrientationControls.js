@@ -91,7 +91,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 		if ( device ) {
 
 			//var alpha = device.alpha ? THREE.Math.degToRad( device.alpha ) + scope.alphaOffset : 0; // Z
-			var alpha = device.alpha ?  THREE.Math.degToRad( alphaCallback(device) ) : 0; // Z
+			var alpha = device.alpha ?  THREE.Math.degToRad( alphaCallback(device) * -1 ) : 0; // Z
 
 			var beta = device.beta ? THREE.Math.degToRad( device.beta ) : 0; // X'
 
