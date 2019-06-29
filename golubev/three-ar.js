@@ -13,7 +13,6 @@ function ThreeAR(camera, updateFrame) {
 
   function orientation() {
     DeviceOrientationControls = new THREE.DeviceOrientationControls( camera );
-    updateFrame.addEvent(DeviceOrientationControls.update);
 
 		camera.position.set( 0, 500, 1000 );
 		function compass(event) {
@@ -28,6 +27,9 @@ function ThreeAR(camera, updateFrame) {
 				var heading = 180 + alpha; //heading [0, 360)
 				document.getElementById("logs").innerHTML = heading.toFixed([0]);
 			}
+
+			DeviceOrientationControls.alphaOffset = THREE.Math.degToRad( heading );
+			updateFrame.addEvent(DeviceOrientationControls.update);
 		}
 
 		// Check if device can provide absolute orientation data
