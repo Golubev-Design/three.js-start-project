@@ -84,7 +84,8 @@ THREE.DeviceOrientationControls = function ( object ) {
 
 	this.update = function () {
 		let lastN = null,
-		  lastAlpha = 0;
+		  lastAlpha = null,
+			currentAlpha = 0;
 
 		if ( scope.enabled === false ) return;
 
@@ -123,15 +124,20 @@ THREE.DeviceOrientationControls = function ( object ) {
 			// } else if ( lastAlpha < Math.floor(alphaRevers) ) {
 			// 	lastN = lastN + 1;
 			// }
-			let diffAlpha = (lastAlpha - Math.floor(event.alpha)) * -1;
-			lastAlpha = Math.floor(event.alpha);
 
-			lastN = lastN + diffAlpha;
+			let reversAlpha = 360 - event.alpha;
+			if (lastAlpha === null) {
+				lastAlpha = Math.floor(reversAlpha);
+				currentAlpha = Math.floor(reversAlpha);
+			} else {
+				let diffAlpha = lastAlpha - Math.floor(reversAlpha);
+				currentAlpha += diffAlpha;
+				lastAlpha = Math.floor(event.alpha);
+			}
+			document.getElementById("logs").innerHTML = heading + '<br>' + (360 - event.alpha) + '<br>' + currentAlpha;
+			console.log(currentAlpha);
 
-			//let newAlpha = alphaRevers - Math.floor(alphaRevers);
-			let newAlpha = lastN;
-
-			return newAlpha;
+			return currentAlpha;
 		}
 
 	};
