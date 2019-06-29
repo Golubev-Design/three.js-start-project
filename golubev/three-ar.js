@@ -15,7 +15,8 @@ function ThreeAR(camera, updateFrame) {
     DeviceOrientationControls = new THREE.DeviceOrientationControls( camera );
     updateFrame.addEvent(DeviceOrientationControls.update);
     window.addEventListener("deviceorientation", event=>{
-      console.log(event)
+			document.getElementById("logs").innerHTML = event.alpha.toFixed([0]);
+      console.log(event);
     });
   }
 }
