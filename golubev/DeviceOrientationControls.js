@@ -83,6 +83,8 @@ THREE.DeviceOrientationControls = function ( object ) {
 	};
 
 	this.update = function () {
+		let lastN = 0,
+		  lastAlpha = 0;
 
 		if ( scope.enabled === false ) return;
 
@@ -113,7 +115,19 @@ THREE.DeviceOrientationControls = function ( object ) {
 				//console.log("Your device is reporting relative alpha values, so this compass won't point north :(");
 				var heading = 180 + alpha; //heading [0, 360)
 			}
-			return heading;
+			if (lastN > Math.floor(heading)+2 || lastN < Math.floor(heading)-2) lastN = Math.floor(heading);
+
+			if ( lastAlpha < Math.floor(event.alpha) ) {
+				lastN = lastN - 1;
+			} else if ( lastAlpha > Math.floor(event.alpha) ) {
+				lastN = lastN + 1;
+			}
+			lastAlpha = Math.floor(event.alpha);
+
+			let newAlpha = event.alpha - Math.floor(event.alpha);
+			newAlpha = newAlpha + lastN;
+
+			return newAlpha;
 		}
 
 	};
