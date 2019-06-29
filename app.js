@@ -61,8 +61,7 @@ function start3DProject() {
     threeTouch = new ThreeTouch(camera, canvas);
     threeTouch.dispose();
 
-    DeviceOrientationControls = new THREE.DeviceOrientationControls( camera );
-    updateFrame.addEvent(DeviceOrientationControls.update);
+    threeAR = new ThreeAR(camera, updateFrame);
 
     stats = new Stats();
     document.body.appendChild(stats.dom);
