@@ -13,6 +13,8 @@ function ThreeAR(camera, updateFrame) {
 
   function orientation() {
     DeviceOrientationControls = new THREE.DeviceOrientationControls( camera );
+		DeviceOrientationControls.alphaCallback(compass);
+		updateFrame.addEvent(DeviceOrientationControls.update);
 
 		camera.position.set( 0, 500, 1000 );
 		function compass(event) {
@@ -21,23 +23,23 @@ function ThreeAR(camera, updateFrame) {
 			if (typeof event.webkitCompassHeading !== "undefined") {
 				alpha = event.webkitCompassHeading; //iOS non-standard
 				var heading = alpha;
-				document.getElementById("logs").innerHTML = heading.toFixed([0]);
 			}	else {
-				console.log("Your device is reporting relative alpha values, so this compass won't point north :(");
+				//console.log("Your device is reporting relative alpha values, so this compass won't point north :(");
 				var heading = 180 + alpha; //heading [0, 360)
-				document.getElementById("logs").innerHTML = heading.toFixed([0]);
 			}
-
-			DeviceOrientationControls.alphaOffset = THREE.Math.degToRad( heading );
-			updateFrame.addEvent(DeviceOrientationControls.update);
+			return heading;
 		}
 
 		// Check if device can provide absolute orientation data
 		if (window.DeviceOrientationAbsoluteEvent) {
-			window.addEventListener("DeviceOrientationAbsoluteEvent", compass);
+			window.addEventListener("DeviceOrientationAbsoluteEvent", function (event) {
+				document.getElementById("logs").innerHTML = compass(event).toFixed([0]);
+			});
 		} // If not, check if the device sends any orientation data
 		else if(window.DeviceOrientationEvent){
-			window.addEventListener("deviceorientation", compass);
+			window.addEventListener("deviceorientation", function (event) {
+				document.getElementById("logs").innerHTML = compass(event).toFixed([0]);
+			});
 		} // Send an alert if the device isn't compatible
 		else {
 			alert("Sorry, try again on a compatible mobile device!");
