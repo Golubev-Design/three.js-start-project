@@ -24,6 +24,10 @@ THREE.DeviceOrientationControls = function ( object ) {
 		alphaCallback = callback;
 	};
 
+	let lastN = null,
+		lastAlpha = null,
+		currentAlpha = 0;
+
 	var onDeviceOrientationChangeEvent = function ( event ) {
 
 		scope.deviceOrientation = event;
@@ -83,9 +87,6 @@ THREE.DeviceOrientationControls = function ( object ) {
 	};
 
 	this.update = function () {
-		let lastN = null,
-		  lastAlpha = null,
-			currentAlpha = 0;
 
 		if ( scope.enabled === false ) return;
 
@@ -134,7 +135,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 				currentAlpha += diffAlpha;
 				lastAlpha = reversAlpha;
 			}
-			document.getElementById("logs").innerHTML = 'v2<br>' + heading + '<br>' + reversAlpha + '<br>' + currentAlpha;
+			document.getElementById("logs").innerHTML = 'v3<br>' + heading + '<br>' + reversAlpha + '<br>' + currentAlpha;
 			console.log(currentAlpha);
 
 			return currentAlpha;
