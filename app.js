@@ -7,7 +7,7 @@
 
 start3DProject();
 function start3DProject() {
-  var camera, controls, scene, HemisphereLight, SpotLight, renderer, tweenAnimation,
+  var camera, controls, scene, HemisphereLight, SpotLight, renderer, tweenAnimation, DeviceOrientationControls,
     workSpace = {
       width: '3000',
       height: '3000',
@@ -15,6 +15,9 @@ function start3DProject() {
       gap: '200',
       shadowQuality: '30'
     };
+  let updateFrame = new UpdateFrame();
+  updateFrame.addEvent(function(){TWEEN.update()});
+
   init();
   light();
   workFlow();
@@ -22,6 +25,7 @@ function start3DProject() {
   ui();
   animate();
   console.log(scene);
+  console.log(updateFrame.getEvents());
 
   function init() {
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 15000);
@@ -48,12 +52,17 @@ function start3DProject() {
   }
 
   function ui() {
-    controls = new THREE.OrbitControls(camera);
-    controls.target.set(0, 0, 0);
-    controls.update();
+    let threeTouch;
 
-    threeTouch = new threeTouch(camera, canvas);
+    // controls = new THREE.OrbitControls(camera);
+    // controls.target.set(0, 0, 0);
+    // controls.update();
+
+    threeTouch = new ThreeTouch(camera, canvas);
     threeTouch.dispose();
+
+    DeviceOrientationControls = new THREE.DeviceOrientationControls( camera );
+    updateFrame.addEvent(DeviceOrientationControls.update);
 
     stats = new Stats();
     document.body.appendChild(stats.dom);
@@ -113,8 +122,24 @@ function start3DProject() {
     tweenAnimation.start();
   }
 
+  function UpdateFrame () {
+    let events = []; //callbacks
+
+    this.frame = function () {
+      for(let event of events) {
+        event();
+      }
+    };
+    this.addEvent = function (callback) {
+      events.push(callback);
+    };
+    this.getEvents = function () {
+      return events;
+    };
+  }
+
   function animate() {
-    TWEEN.update();
+    updateFrame.frame();
     requestAnimationFrame(animate);
     render();
   }

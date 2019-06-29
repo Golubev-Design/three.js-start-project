@@ -1,4 +1,4 @@
-function threeTouch(camera, canvas) {
+function ThreeTouch(camera, canvas) {
 	this.camera = camera;
 	this.canvas = canvas;
 
