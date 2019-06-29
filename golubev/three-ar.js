@@ -37,7 +37,7 @@ function ThreeAR(camera, updateFrame) {
 		} // If not, check if the device sends any orientation data
 		else if(window.DeviceOrientationEvent){
 			window.addEventListener("deviceorientation", function (event) {
-				document.getElementById("logs").innerHTML = compass(event);
+				document.getElementById("logs").innerHTML = compass(event) + '<br>' + event.alpha;
 			});
 		} // Send an alert if the device isn't compatible
 		else {
