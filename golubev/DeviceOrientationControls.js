@@ -91,7 +91,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 		if ( device ) {
 
 			//var alpha = device.alpha ? THREE.Math.degToRad( device.alpha ) + scope.alphaOffset : 0; // Z
-			var alpha = device.alpha ?  THREE.Math.degToRad( alphaCallback(device) * -1 ) : 0; // Z
+			var alpha = device.alpha ?  THREE.Math.degToRad( compass(device) * -1 ) : 0; // Z
 
 			var beta = device.beta ? THREE.Math.degToRad( device.beta ) : 0; // X'
 
@@ -103,6 +103,18 @@ THREE.DeviceOrientationControls = function ( object ) {
 
 		}
 
+		function compass(event) {
+			var alpha    = event.alpha; //z axis rotation [0,360)
+			//Check if absolute values have been sent
+			if (typeof event.webkitCompassHeading !== "undefined") {
+				alpha = event.webkitCompassHeading; //iOS non-standard
+				var heading = alpha;
+			}	else {
+				//console.log("Your device is reporting relative alpha values, so this compass won't point north :(");
+				var heading = 180 + alpha; //heading [0, 360)
+			}
+			return heading;
+		}
 
 	};
 

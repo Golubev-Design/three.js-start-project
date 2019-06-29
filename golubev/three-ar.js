@@ -13,7 +13,6 @@ function ThreeAR(camera, updateFrame) {
 
   function orientation() {
     DeviceOrientationControls = new THREE.DeviceOrientationControls( camera );
-		DeviceOrientationControls.alphaCallback(compass);
 		updateFrame.addEvent(DeviceOrientationControls.update);
 
 		camera.position.set( 0, 500, 1000 );
