@@ -15,18 +15,16 @@ function ThreeAR(camera, updateFrame) {
     DeviceOrientationControls = new THREE.DeviceOrientationControls( camera );
     updateFrame.addEvent(DeviceOrientationControls.update);
 
-		// Get event data
 		function compass(event) {
 			var alpha    = event.alpha; //z axis rotation [0,360)
 			//Check if absolute values have been sent
 			if (typeof event.webkitCompassHeading !== "undefined") {
 				alpha = event.webkitCompassHeading; //iOS non-standard
-				var heading = alpha
+				var heading = alpha;
 				document.getElementById("logs").innerHTML = heading.toFixed([0]);
-			}
-			else {
-				alert("Your device is reporting relative alpha values, so this compass won't point north :(");
-				var heading = 360 - alpha; //heading [0, 360)
+			}	else {
+				console.log("Your device is reporting relative alpha values, so this compass won't point north :(");
+				var heading = 180 + alpha; //heading [0, 360)
 				document.getElementById("logs").innerHTML = heading.toFixed([0]);
 			}
 		}
