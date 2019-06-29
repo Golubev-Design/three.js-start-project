@@ -117,14 +117,15 @@ THREE.DeviceOrientationControls = function ( object ) {
 			}
 			if (lastN > Math.floor(heading)+2 || lastN < Math.floor(heading)-2) lastN = Math.floor(heading);
 
-			if ( lastAlpha < Math.floor(event.alpha) ) {
+			let alphaRevers = event.alpha * -1;
+			if ( lastAlpha > Math.floor(alphaRevers) ) {
 				lastN = lastN - 1;
-			} else if ( lastAlpha > Math.floor(event.alpha) ) {
+			} else if ( lastAlpha < Math.floor(alphaRevers) ) {
 				lastN = lastN + 1;
 			}
 			lastAlpha = Math.floor(event.alpha);
 
-			let newAlpha = 1 - (event.alpha - Math.floor(event.alpha));
+			let newAlpha = alphaRevers - Math.floor(alphaRevers);
 			newAlpha = newAlpha + lastN;
 
 			return newAlpha;
