@@ -116,7 +116,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 				//console.log("Your device is reporting relative alpha values, so this compass won't point north :(");
 				var heading = 180 + alpha; //heading [0, 360)
 			}
-			if (lastN > Math.floor(heading)+100 || lastN < Math.floor(heading)-100 || lastN === null) lastN = Math.floor(heading);
+			//if (lastN > Math.floor(heading)+100 || lastN < Math.floor(heading)-100 || lastN === null) lastN = Math.floor(heading);
 
 			// let alphaRevers = event.alpha * -1;
 			// if ( lastAlpha > Math.floor(alphaRevers) ) {
@@ -126,7 +126,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 			// }
 
 			let reversAlpha = 360 - event.alpha;
-			if (lastAlpha === null || currentAlpha > Math.floor(heading) + 50 || currentAlpha < Math.floor(heading) - 50) {
+			if (lastAlpha === null || Math.floor(reversAlpha)===currentAlpha) {
 				lastAlpha = Math.floor(reversAlpha);
 				currentAlpha = Math.floor(heading);
 			} else {
@@ -134,7 +134,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 				currentAlpha += diffAlpha;
 				lastAlpha = Math.floor(event.alpha);
 			}
-			document.getElementById("logs").innerHTML = heading + '<br>' + (360 - event.alpha) + '<br>' + currentAlpha;
+			document.getElementById("logs").innerHTML = heading + '<br>' + reversAlpha + '<br>' + currentAlpha;
 			console.log(currentAlpha);
 
 			return currentAlpha;
