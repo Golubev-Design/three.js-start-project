@@ -134,7 +134,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 				currentAlpha += diffAlpha;
 				lastAlpha = Math.floor(event.alpha);
 			}
-			document.getElementById("logs").innerHTML = heading + '<br>' + reversAlpha + '<br>' + currentAlpha;
+			document.getElementById("logs").innerHTML = 'v1<br>' + heading + '<br>' + reversAlpha + '<br>' + currentAlpha;
 			console.log(currentAlpha);
 
 			return currentAlpha;
