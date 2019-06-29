@@ -127,7 +127,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 			// }
 
 			let reversAlpha = 360 - event.alpha;
-			if (lastAlpha === null || lastAlpha === currentAlpha) {
+			if (lastAlpha === null || Math.floor(lastAlpha) === Math.floor(currentAlpha)) {
 				lastAlpha = reversAlpha;
 				currentAlpha = Math.floor(heading);
 			} else {
@@ -135,7 +135,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 				currentAlpha += diffAlpha;
 				lastAlpha = reversAlpha;
 			}
-			document.getElementById("logs").innerHTML = 'v4<br>' + heading + '<br>' + reversAlpha + '<br>' + currentAlpha;
+			document.getElementById("logs").innerHTML = 'v5<br>' + heading + '<br>' + reversAlpha + '<br>' + currentAlpha;
 			console.log(currentAlpha);
 
 			return currentAlpha;
