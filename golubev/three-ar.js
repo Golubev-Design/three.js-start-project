@@ -15,6 +15,7 @@ function ThreeAR(camera, updateFrame) {
     DeviceOrientationControls = new THREE.DeviceOrientationControls( camera );
     updateFrame.addEvent(DeviceOrientationControls.update);
 
+		camera.position.set( 0, 500, 1000 );
 		function compass(event) {
 			var alpha    = event.alpha; //z axis rotation [0,360)
 			//Check if absolute values have been sent
