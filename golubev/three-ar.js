@@ -32,12 +32,12 @@ function ThreeAR(camera, updateFrame) {
 		// Check if device can provide absolute orientation data
 		if (window.DeviceOrientationAbsoluteEvent) {
 			window.addEventListener("DeviceOrientationAbsoluteEvent", function (event) {
-				document.getElementById("logs").innerHTML = compass(event).toFixed([0]);
+				document.getElementById("logs").innerHTML = compass(event);
 			});
 		} // If not, check if the device sends any orientation data
 		else if(window.DeviceOrientationEvent){
 			window.addEventListener("deviceorientation", function (event) {
-				document.getElementById("logs").innerHTML = compass(event).toFixed([0]);
+				document.getElementById("logs").innerHTML = compass(event);
 			});
 		} // Send an alert if the device isn't compatible
 		else {
