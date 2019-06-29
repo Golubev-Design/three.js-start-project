@@ -14,6 +14,6 @@ function ThreeAR(camera, updateFrame) {
   function orientation() {
     DeviceOrientationControls = new THREE.DeviceOrientationControls( camera );
     updateFrame.addEvent(DeviceOrientationControls.update);
-    window.addEventListener("DeviceOrientationAbsoluteEvent", event=>{alert(event.webkitCompassHeading)});
+    window.addEventListener("deviceorientation", event=>{alert(event.webkitCompassHeading)});
   }
 }
