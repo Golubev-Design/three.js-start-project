@@ -5,6 +5,7 @@
 
   },
   "scripts": {
-    "start" : "http-server"
+    "start": "http-server",
+    "wi-fi start": "ws --spa index.html"
   }
 }

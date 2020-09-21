@@ -150,6 +150,21 @@ THREE.DeviceOrientationControls = function ( object ) {
 
 	};
 
-	this.connect();
+	// DeviceOrientationEvent iOs detect
+	document.getElementById("start").addEventListener('click', () => {
+		console.log('vr');
+		if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+			DeviceOrientationEvent.requestPermission()
+				.then(permissionState => {
+					if (permissionState === 'granted') {
+						this.connect();
+					}
+				})
+				.catch(console.error);
+		} else {
+			// handle regular non iOS 13+ devices
+			this.connect();
+		}
+	});
 
 };
